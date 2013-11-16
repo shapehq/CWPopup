@@ -237,11 +237,11 @@ NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
         // shadow setup
         viewControllerToPresent.view.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
         viewControllerToPresent.view.layer.shadowColor = [UIColor blackColor].CGColor;
-        viewControllerToPresent.view.layer.shadowRadius = 3.0f;
-        viewControllerToPresent.view.layer.shadowOpacity = 0.8f;
+//        viewControllerToPresent.view.layer.shadowRadius = 3.0f;
+//        viewControllerToPresent.view.layer.shadowOpacity = 0.8f;
         viewControllerToPresent.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:viewControllerToPresent.view.layer.bounds].CGPath;
         // rounded corners
-        viewControllerToPresent.view.layer.cornerRadius = 5.0f;
+//        viewControllerToPresent.view.layer.cornerRadius = 0.0f;
         // blurview
         if (self.useBlurForPopup) {
             [self addBlurView];
