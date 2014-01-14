@@ -259,6 +259,11 @@ NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
         }
         UIView *blurView = objc_getAssociatedObject(self, &CWBlurViewKey);
 
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedBlurView:)];
+        [blurView setUserInteractionEnabled:YES];
+        [blurView addGestureRecognizer:tapGestureRecognizer];
+
+
         [viewControllerToPresent beginAppearanceTransition:YES animated:flag];
 
         // setup
@@ -318,6 +323,12 @@ NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
     // remove observer
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
+
+- (void)tappedOutsidePresentedPopupViewController:(UITapGestureRecognizer *)gestureRecognizer
+{
+    // Override in subclasses
+}
+
 
 #pragma mark - handling screen orientation change
 
@@ -386,6 +397,13 @@ NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
     NSNumber *result = objc_getAssociatedObject(self, &CWUseBlurForPopup);
     return [result boolValue];
 
+}
+
+#pragma mark UIGestureRecognizers
+
+- (void)tappedBlurView:(UITapGestureRecognizer *)gestureRecognizer
+{
+    [self tappedOutsidePresentedPopupViewController:gestureRecognizer];
 }
 
 @end
