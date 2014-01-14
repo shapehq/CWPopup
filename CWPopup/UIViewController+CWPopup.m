@@ -403,7 +403,7 @@ NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
 
 - (void)tappedBlurView:(UITapGestureRecognizer *)gestureRecognizer
 {
-    [self tappedOutsidePresentedPopupViewController:gestureRecognizer];
+    [[self popupViewController] tappedOutsidePresentedPopupViewController:gestureRecognizer];
 }
 
 @end
