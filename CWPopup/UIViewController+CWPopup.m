@@ -245,7 +245,6 @@ NSString const *CWTintColorForBlurredBackground = @"CWTintColorForBlurredBackgro
 //        viewControllerToPresent.view.layer.cornerRadius = 0.0f;
         // blurview
         if (self.useBlurForPopup) {
-            [self setTintColorForBlurredBackground:[UIColor clearColor]];
             [self addBlurView];
         } else {
             UIView *fadeView = [UIView new];
@@ -407,6 +406,11 @@ NSString const *CWTintColorForBlurredBackground = @"CWTintColorForBlurredBackgro
 
 - (UIColor *)tintColorForBlurredBackground {
     UIColor *tintColor = objc_getAssociatedObject(self, &CWTintColorForBlurredBackground);
+
+    if (!tintColor) {
+        tintColor = [UIColor clearColor];
+    }
+
     return tintColor;
 }
 
