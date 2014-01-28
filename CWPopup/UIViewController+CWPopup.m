@@ -159,6 +159,7 @@
 NSString const *CWPopupKey = @"CWPopupkey";
 NSString const *CWBlurViewKey = @"CWFadeViewKey";
 NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
+NSString const *CWTintColorForBlurredBackground = @"CWTintColorForBlurredBackground";
 
 @implementation UIViewController (CWPopup)
 
@@ -191,7 +192,7 @@ NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
 
 - (UIImage *)getBlurredImage:(UIImage *)imageToBlur {
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-        return [imageToBlur applyBlurWithRadius:10.0f tintColor:[UIColor clearColor] saturationDeltaFactor:1.0 maskImage:nil];
+        return [imageToBlur applyBlurWithRadius:10.0f tintColor:[self tintColorForBlurredBackground] saturationDeltaFactor:1.0 maskImage:nil];
     }
     return imageToBlur;
 }
@@ -244,6 +245,7 @@ NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
 //        viewControllerToPresent.view.layer.cornerRadius = 0.0f;
         // blurview
         if (self.useBlurForPopup) {
+            [self setTintColorForBlurredBackground:[UIColor clearColor]];
             [self addBlurView];
         } else {
             UIView *fadeView = [UIView new];
@@ -397,6 +399,15 @@ NSString const *CWUseBlurForPopup = @"CWUseBlurForPopup";
     NSNumber *result = objc_getAssociatedObject(self, &CWUseBlurForPopup);
     return [result boolValue];
 
+}
+
+- (void)setTintColorForBlurredBackground:(UIColor *)tintColor {
+    objc_setAssociatedObject(self, &CWTintColorForBlurredBackground, tintColor, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIColor *)tintColorForBlurredBackground {
+    UIColor *tintColor = objc_getAssociatedObject(self, &CWTintColorForBlurredBackground);
+    return tintColor;
 }
 
 #pragma mark UIGestureRecognizers
