@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Cezary Wojcik" => "cezarywojcik@cezarywojcik.com" }
   s.platform     = :ios, '4.3'
-  s.source = { :git => "https://github.com/kasperkronborg/CWPopup.git",
+  s.source = { :git => "git@github.com:shapehq/CWPopup.git",
                :tag => s.version.to_s }
   s.source_files  = 'CWPopup'
   s.requires_arc = true
